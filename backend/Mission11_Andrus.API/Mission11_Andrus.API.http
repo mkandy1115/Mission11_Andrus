@@ -1,0 +1,6 @@
+@Mission11_Andrus.API_HostAddress = http://localhost:5255
+
+GET {{Mission11_Andrus.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

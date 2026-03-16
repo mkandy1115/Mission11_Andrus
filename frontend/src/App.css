@@ -1,0 +1,105 @@
+.bookstore-shell {
+  padding: 48px 40px 56px;
+  text-align: left;
+}
+
+.bookstore-hero {
+  margin-bottom: 28px;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #7a5c2e;
+  margin-bottom: 10px;
+}
+
+.hero-copy {
+  max-width: 700px;
+  color: #5f6368;
+}
+
+.control-panel {
+  margin-bottom: 24px;
+  background: rgba(255, 248, 235, 0.92);
+}
+
+.results-summary {
+  min-height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  color: #495057;
+  font-weight: 600;
+}
+
+.book-card {
+  border-left: 5px solid #c89c4a;
+}
+
+.book-meta {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.book-title {
+  font-size: 1.6rem;
+  margin-bottom: 0.35rem;
+}
+
+.book-author {
+  color: #6c757d;
+  font-size: 1.05rem;
+}
+
+.price-pill {
+  background: #1f4f46;
+  color: white;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 0.7rem 1rem;
+  min-width: 110px;
+  text-align: center;
+}
+
+.detail-label {
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #7a7f87;
+  margin-bottom: 0.3rem;
+}
+
+.pagination-bar {
+  margin-top: 28px;
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.page-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .bookstore-shell {
+    padding: 28px 18px 40px;
+  }
+
+  .results-summary {
+    justify-content: flex-start;
+    min-height: auto;
+  }
+
+  .book-title {
+    font-size: 1.3rem;
+  }
+}
