@@ -1,3 +1,5 @@
+// Matthew Andrus IS415 Mission 11
+// This file serves as the shared TypeScript shape for book records returned by the backend API.
 export type Book = {
   bookID: number
   title: string

@@ -1,12 +1,12 @@
+// Matthew Andrus IS415 Mission 11
+// This file serves as the ASP.NET Core startup configuration for the bookstore API.
 using Microsoft.EntityFrameworkCore;
 using Mission11_Andrus.API.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
+// Register the API controllers, OpenAPI support, and the SQLite database context.
 builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
 builder.Services.AddDbContext<BookDbContext>(options =>
@@ -14,7 +14,7 @@ builder.Services.AddDbContext<BookDbContext>(options =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Enable OpenAPI in development and allow the React frontend to call this API.
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
@@ -22,6 +22,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors(x => x.WithOrigins("http://localhost:3000"));
 
+// Map incoming requests to the controller endpoints.
 app.UseAuthorization();
 
 app.MapControllers();

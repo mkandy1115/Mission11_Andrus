@@ -1,9 +1,12 @@
+// Matthew Andrus IS415 Mission 11
+// This file serves as the EF Core model for a single book record in the bookstore database.
 using System.ComponentModel.DataAnnotations;
 
 namespace Mission11_Andrus.API.Data
 {
     public class Book
     {
+        // Define the fields that map each book row from the SQLite database.
         [Key]
         public int BookID { get; set; }
 
