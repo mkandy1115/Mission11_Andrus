@@ -11,3 +11,16 @@ export type Book = {
   pageCount: number
   price: number
 }
+
+export type SortOrder = 'asc' | 'desc'
+
+export type BrowseState = {
+  pageSize: number
+  pageNum: number
+  sortOrder: SortOrder
+  categories: string[]
+}
+
+export type CartItem = Book & {
+  quantity: number
+}

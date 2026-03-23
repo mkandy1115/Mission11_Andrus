@@ -1,10 +1,17 @@
 .bookstore-shell {
-  padding: 48px 40px 56px;
+  padding: 40px 24px 56px;
   text-align: left;
 }
 
 .bookstore-hero {
-  margin-bottom: 28px;
+  margin-bottom: 0;
+}
+
+.hero-panel {
+  background:
+    radial-gradient(circle at top right, rgba(200, 156, 74, 0.22), transparent 30%),
+    linear-gradient(135deg, rgba(255, 248, 235, 0.96), rgba(244, 234, 214, 0.92));
+  padding: 2rem;
 }
 
 .eyebrow {
@@ -22,7 +29,6 @@
 }
 
 .control-panel {
-  margin-bottom: 24px;
   background: rgba(255, 248, 235, 0.92);
 }
 
@@ -35,8 +41,44 @@
   font-weight: 600;
 }
 
+.category-list .list-group-item {
+  border-inline: 0;
+  border-radius: 0;
+}
+
+.category-list .list-group-item:first-child {
+  border-top: 0;
+}
+
+.category-list .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+.cart-summary-card,
+.cart-total-card,
+.empty-cart-card {
+  background: rgba(255, 252, 246, 0.96);
+}
+
 .book-card {
   border-left: 5px solid #c89c4a;
+  overflow: hidden;
+}
+
+.book-accordion-button {
+  align-items: stretch;
+  background: rgba(255, 252, 246, 0.98);
+  padding: 1.25rem 1.5rem;
+}
+
+.book-accordion-button:not(.collapsed) {
+  background: rgba(252, 245, 232, 0.98);
+  color: inherit;
+  box-shadow: none;
+}
+
+.book-accordion-button:focus {
+  box-shadow: 0 0 0 0.2rem rgba(200, 156, 74, 0.2);
 }
 
 .book-meta {
@@ -46,23 +88,20 @@
 }
 
 .book-title {
-  font-size: 1.6rem;
-  margin-bottom: 0.35rem;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.35rem;
+  line-height: 1.2;
+  margin: 0;
+  color: #1d1d1b;
 }
 
 .book-author {
   color: #6c757d;
-  font-size: 1.05rem;
+  font-size: 1rem;
 }
 
-.price-pill {
-  background: #1f4f46;
-  color: white;
-  font-weight: 700;
-  border-radius: 999px;
-  padding: 0.7rem 1rem;
-  min-width: 110px;
-  text-align: center;
+.compact-book-row {
+  padding-right: 0.75rem;
 }
 
 .detail-label {
@@ -89,9 +128,17 @@
   justify-content: center;
 }
 
+.quantity-pill {
+  min-width: 52px;
+}
+
 @media (max-width: 768px) {
   .bookstore-shell {
-    padding: 28px 18px 40px;
+    padding: 24px 10px 40px;
+  }
+
+  .hero-panel {
+    padding: 1.4rem;
   }
 
   .results-summary {
@@ -100,6 +147,10 @@
   }
 
   .book-title {
-    font-size: 1.3rem;
+    font-size: 1.15rem;
+  }
+
+  .book-accordion-button {
+    padding: 1rem;
   }
 }

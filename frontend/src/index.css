@@ -17,8 +17,7 @@
 }
 
 #root {
-  width: 1180px;
-  max-width: 100%;
+  width: min(1320px, 100%);
   margin: 0 auto;
   border-inline: 1px solid var(--border);
   min-height: 100svh;

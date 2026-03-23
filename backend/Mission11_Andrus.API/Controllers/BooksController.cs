@@ -18,14 +18,21 @@ namespace Mission11_Andrus.API.Controllers
         }
 
         [HttpGet("AllBooks")]
-        public IActionResult GetBooks(int pageSize = 5, int pageNum = 1, string sortOrder = "asc")
+        public IActionResult GetBooks(int pageSize = 5, int pageNum = 1, string sortOrder = "asc", [FromQuery] string[]? categories = null)
         {
-            // Start with the full books table and then apply the requested sort order.
+            // Start with the full books table, optionally filter by one or more categories, and then apply the requested sort order.
             var query = _bookContext.Books.AsQueryable();
+
+            if (categories is { Length: > 0 })
+            {
+                query = query.Where(b => categories.Contains(b.Category));
+            }
 
             query = sortOrder.ToLower() == "desc"
                 ? query.OrderByDescending(b => b.Title)
                 : query.OrderBy(b => b.Title);
+
+            var totalNumBooks = query.Count();
 
             // Return only the records needed for the current page.
             var respData = query
@@ -34,8 +41,6 @@ namespace Mission11_Andrus.API.Controllers
                 .ToList();
 
             // Send both the current page of books and the total count for pagination.
-            var totalNumBooks = _bookContext.Books.Count();
-
             var response = new
             {
                 books = respData,
@@ -43,6 +48,19 @@ namespace Mission11_Andrus.API.Controllers
             };
 
             return Ok(response);
+        }
+
+        [HttpGet("Categories")]
+        public IActionResult GetCategories()
+        {
+            // Return the distinct book categories for the multi-select filter in the React app.
+            var categories = _bookContext.Books
+                .Select(b => b.Category)
+                .Distinct()
+                .OrderBy(category => category)
+                .ToList();
+
+            return Ok(categories);
         }
     }
 }
