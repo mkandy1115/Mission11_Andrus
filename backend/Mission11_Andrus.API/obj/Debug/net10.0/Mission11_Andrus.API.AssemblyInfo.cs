@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Mission11_Andrus.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c312fda12d2773482ba349e15f709f39e800be5d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+949fa14b8228a33679fe4eb17fbaadcd3b031983")]
 [assembly: System.Reflection.AssemblyProductAttribute("Mission11_Andrus.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Mission11_Andrus.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

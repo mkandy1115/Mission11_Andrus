@@ -2,7 +2,7 @@
 // This file serves as the main bookstore view with category filtering, pagination, cart summary, and data loading from the API.
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { API_BASE_URL } from './apiBase'
+import { API_URL } from './api/BooksAPI'
 import type { Book, BrowseState } from './types/Book'
 
 type BookListProps = {
@@ -35,7 +35,7 @@ function BookList({
   useEffect(() => {
     // Load the available category filters once when the bookstore page opens.
     const fetchCategories = async () => {
-      const response = await fetch(`${API_BASE_URL}/api/Books/Categories`)
+      const response = await fetch(`${API_URL}/api/Books/Categories`)
       const data = (await response.json()) as string[]
 
       setCategories(data)
@@ -60,7 +60,7 @@ function BookList({
       })
 
       const response = await fetch(
-        `${API_BASE_URL}/api/Books/AllBooks?${params.toString()}`
+        `${API_URL}/api/Books/AllBooks?${params.toString()}`
       )
 
       const data = await response.json()

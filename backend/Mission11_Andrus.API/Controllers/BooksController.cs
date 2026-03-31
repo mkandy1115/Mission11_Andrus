@@ -9,13 +9,10 @@ namespace Mission11_Andrus.API.Controllers
     [ApiController]
     public class BooksController : ControllerBase
     {
-        private readonly BookDbContext _bookContext;
+        private BookDbContext _bookContext;
 
         // Receive the EF Core database context through dependency injection.
-        public BooksController(BookDbContext temp)
-        {
-            _bookContext = temp;
-        }
+        public BooksController(BookDbContext temp) => _bookContext = temp;
 
         [HttpGet("AllBooks")]
         public IActionResult GetBooks(int pageSize = 5, int pageNum = 1, string sortOrder = "asc", [FromQuery] string[]? categories = null)

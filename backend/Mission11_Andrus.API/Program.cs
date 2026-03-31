@@ -14,14 +14,15 @@ builder.Services.AddDbContext<BookDbContext>(options =>
 
 // Mission 13: read allowed frontend origins from configuration so Azure URLs can be added without code changes.
 var corsOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>()
-                  ?? new[] { "http://localhost:3000" };
+    ?? new[] { "http://localhost:3000" };
 
 builder.Services.AddCors(options =>
-{
-    options.AddPolicy(
-        "BookstoreCors",
-        policy => policy.WithOrigins(corsOrigins).AllowAnyHeader().AllowAnyMethod());
-});
+    options.AddPolicy("AllowBookStoreApi", policy =>
+    {
+        policy.WithOrigins(corsOrigins)
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+    }));
 
 var app = builder.Build();
 
@@ -31,11 +32,13 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-app.UseCors("BookstoreCors");
+app.UseCors("AllowBookStoreApi");
 
-// Map incoming requests to the controller endpoints.
+app.UseHttpsRedirection();
+
 app.UseAuthorization();
 
+// Map incoming requests to the controller endpoints.
 app.MapControllers();
 
 app.Run();

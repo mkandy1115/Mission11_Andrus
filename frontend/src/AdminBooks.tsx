@@ -2,7 +2,7 @@
 // Simple admin screen to add, edit, and delete books through the API.
 import { type FormEvent, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { API_BASE_URL } from './apiBase'
+import { API_URL } from './api/BooksAPI'
 import './App.css'
 import type { Book } from './types/Book'
 
@@ -31,7 +31,7 @@ function AdminBooks() {
       pageNum: '1',
       sortOrder: 'asc',
     })
-    const response = await fetch(`${API_BASE_URL}/api/Books/AllBooks?${params}`)
+    const response = await fetch(`${API_URL}/api/Books/AllBooks?${params}`)
 
     if (!response.ok) {
       setStatus('Could not load books. Is the API running?')
@@ -55,8 +55,8 @@ function AdminBooks() {
 
     const isNew = form.bookID === 0
     const url = isNew
-      ? `${API_BASE_URL}/api/Books`
-      : `${API_BASE_URL}/api/Books/UpdateBook/${form.bookID}`
+      ? `${API_URL}/api/Books`
+      : `${API_URL}/api/Books/UpdateBook/${form.bookID}`
     const method = isNew ? 'POST' : 'PUT'
 
     const response = await fetch(url, {
@@ -81,7 +81,7 @@ function AdminBooks() {
     }
 
     setStatus('')
-    const response = await fetch(`${API_BASE_URL}/api/Books/DeleteBook/${bookID}`, {
+    const response = await fetch(`${API_URL}/api/Books/DeleteBook/${bookID}`, {
       method: 'DELETE',
     })
 
@@ -103,6 +103,11 @@ function AdminBooks() {
   const startEdit = (book: Book) => {
     setStatus('')
     setForm({ ...book })
+  }
+
+  const cancelEdit = () => {
+    setStatus('')
+    setForm(emptyBook())
   }
 
   return (
@@ -223,10 +228,15 @@ function AdminBooks() {
                     />
                   </div>
                 </div>
-                <div className="d-flex gap-2 mt-4">
+                <div className="d-flex flex-wrap gap-2 mt-4">
                   <button className="btn btn-primary" type="submit">
                     {form.bookID === 0 ? 'Add book' : 'Save changes'}
                   </button>
+                  {form.bookID !== 0 && (
+                    <button className="btn btn-outline-secondary" type="button" onClick={cancelEdit}>
+                      Cancel editing
+                    </button>
+                  )}
                 </div>
               </form>
             </div>
