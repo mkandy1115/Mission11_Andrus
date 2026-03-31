@@ -1,6 +1,8 @@
-// Matthew Andrus IS415 Mission 12
+// Matthew Andrus IS415 Mission 13
 // This file serves as the main bookstore view with category filtering, pagination, cart summary, and data loading from the API.
 import { useEffect, useMemo, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { API_BASE_URL } from './apiBase'
 import type { Book, BrowseState } from './types/Book'
 
 type BookListProps = {
@@ -33,7 +35,7 @@ function BookList({
   useEffect(() => {
     // Load the available category filters once when the bookstore page opens.
     const fetchCategories = async () => {
-      const response = await fetch('https://localhost:5000/api/Books/Categories')
+      const response = await fetch(`${API_BASE_URL}/api/Books/Categories`)
       const data = (await response.json()) as string[]
 
       setCategories(data)
@@ -58,7 +60,7 @@ function BookList({
       })
 
       const response = await fetch(
-        `https://localhost:5000/api/Books/AllBooks?${params.toString()}`
+        `${API_BASE_URL}/api/Books/AllBooks?${params.toString()}`
       )
 
       const data = await response.json()
@@ -112,9 +114,14 @@ function BookList({
                   </p>
                 </div>
 
-                <button className="btn btn-primary btn-lg" onClick={onOpenCart}>
-                  View Cart ({cartItemCount})
-                </button>
+                <div className="d-flex flex-wrap gap-2 justify-content-lg-end">
+                  <Link className="btn btn-outline-secondary btn-lg" to="/adminbooks">
+                    Admin books
+                  </Link>
+                  <button className="btn btn-primary btn-lg" onClick={onOpenCart}>
+                    View Cart ({cartItemCount})
+                  </button>
+                </div>
               </div>
             </div>
           </div>

@@ -1,5 +1,5 @@
-// Matthew Andrus IS415 Mission 11
-// This file serves as the API controller that returns paged and sorted book data to the frontend.
+// Matthew Andrus IS415 Mission 13
+// This file serves as the API controller for browsing, filtering, and admin CRUD on bookstore data.
 using Microsoft.AspNetCore.Mvc;
 using Mission11_Andrus.API.Data;
 
@@ -61,6 +61,75 @@ namespace Mission11_Andrus.API.Controllers
                 .ToList();
 
             return Ok(categories);
+        }
+
+        // Mission 13: insert a new book row and return the saved record (including generated BookID).
+        [HttpPost]
+        public IActionResult CreateBook([FromBody] Book book)
+        {
+            if (book == null)
+            {
+                return BadRequest("Book payload is required.");
+            }
+
+            // Let the database assign the primary key for new rows.
+            book.BookID = 0;
+            _bookContext.Books.Add(book);
+            _bookContext.SaveChanges();
+
+            return Ok(book);
+        }
+
+        // Mission 13: update every column on an existing book when the IDs in the route and body match.
+        [HttpPut("UpdateBook/{bookID:int}")]
+        public IActionResult UpdateBook(int bookID, [FromBody] Book book)
+        {
+            if (book == null)
+            {
+                return BadRequest("Book payload is required.");
+            }
+
+            if (bookID != book.BookID)
+            {
+                return BadRequest("Route id and payload BookID must match.");
+            }
+
+            var existingBook = _bookContext.Books.Find(bookID);
+
+            if (existingBook == null)
+            {
+                return NotFound();
+            }
+
+            existingBook.Title = book.Title;
+            existingBook.Author = book.Author;
+            existingBook.Publisher = book.Publisher;
+            existingBook.ISBN = book.ISBN;
+            existingBook.Classification = book.Classification;
+            existingBook.Category = book.Category;
+            existingBook.PageCount = book.PageCount;
+            existingBook.Price = book.Price;
+
+            _bookContext.SaveChanges();
+
+            return Ok(existingBook);
+        }
+
+        // Mission 13: remove a book row when the primary key exists.
+        [HttpDelete("DeleteBook/{bookID:int}")]
+        public IActionResult DeleteBook(int bookID)
+        {
+            var existingBook = _bookContext.Books.Find(bookID);
+
+            if (existingBook == null)
+            {
+                return NotFound();
+            }
+
+            _bookContext.Books.Remove(existingBook);
+            _bookContext.SaveChanges();
+
+            return NoContent();
         }
     }
 }

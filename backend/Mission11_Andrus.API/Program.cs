@@ -1,4 +1,4 @@
-// Matthew Andrus IS415 Mission 12
+// Matthew Andrus IS415 Mission 13
 // This file serves as the ASP.NET Core startup configuration for the bookstore API.
 using Microsoft.EntityFrameworkCore;
 using Mission11_Andrus.API.Data;
@@ -12,6 +12,17 @@ builder.Services.AddOpenApi();
 builder.Services.AddDbContext<BookDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("BookstoreConnection")));
 
+// Mission 13: read allowed frontend origins from configuration so Azure URLs can be added without code changes.
+var corsOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>()
+                  ?? new[] { "http://localhost:3000" };
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(
+        "BookstoreCors",
+        policy => policy.WithOrigins(corsOrigins).AllowAnyHeader().AllowAnyMethod());
+});
+
 var app = builder.Build();
 
 // Enable OpenAPI in development and allow the React frontend to call this API.
@@ -20,7 +31,7 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-app.UseCors(x => x.WithOrigins("http://localhost:3000"));
+app.UseCors("BookstoreCors");
 
 // Map incoming requests to the controller endpoints.
 app.UseAuthorization();

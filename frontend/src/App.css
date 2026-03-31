@@ -132,6 +132,16 @@
   min-width: 52px;
 }
 
+/* Mission 13: light styling for the admin CRUD screen (mostly Bootstrap). */
+.admin-books .admin-form-card {
+  background: rgba(255, 252, 246, 0.96);
+}
+
+.admin-books .admin-table-wrap {
+  max-height: 420px;
+  overflow: auto;
+}
+
 @media (max-width: 768px) {
   .bookstore-shell {
     padding: 24px 10px 40px;
