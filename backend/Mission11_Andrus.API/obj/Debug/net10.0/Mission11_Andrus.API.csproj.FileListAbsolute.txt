@@ -64,3 +64,4 @@ C:\Users\kyoan\Documents\響\School\2026 Winter\IS 413 Ent. App\Mission11\backen
 C:\Users\kyoan\Documents\響\School\2026 Winter\IS 413 Ent. App\Mission11\backend\Mission11_Andrus.API\obj\Debug\net10.0\Mission11_Andrus.API.genruntimeconfig.cache
 C:\Users\kyoan\Documents\響\School\2026 Winter\IS 413 Ent. App\Mission11\backend\Mission11_Andrus.API\obj\Debug\net10.0\ref\Mission11_Andrus.API.dll
 C:\Users\kyoan\Documents\響\School\2026 Winter\IS 413 Ent. App\Mission11\backend\Mission11_Andrus.API\obj\Debug\net10.0\Mission11_Andrus.API.sourcelink.json
+C:\Users\kyoan\Documents\響\School\2026 Winter\IS 413 Ent. App\Mission11\backend\Mission11_Andrus.API\bin\Debug\net10.0\Bookstore.sqlite

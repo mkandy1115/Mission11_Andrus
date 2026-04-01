@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/0c154e3d-bfda-44f0-9a3c-91afa7d9dc0e/resourceGroups/appsvc_windows_canadacentral/providers/Microsoft.Web/sites/Mission13-BookStore",
+    "appService.deploySubpath": "backend\\Mission11_Andrus.API\\publish"
+}
